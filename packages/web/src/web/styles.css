@@ -1,0 +1,106 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "leaflet/dist/leaflet.css";
+
+@theme inline {
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Poppins", system-ui, sans-serif;
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-terracotta: var(--terracotta);
+  --color-forest: var(--forest);
+  --color-ochre: var(--ochre);
+  --color-background: var(--paper);
+  --color-foreground: var(--ink);
+  --color-border: var(--line);
+  --color-ring: var(--terracotta);
+  --color-primary: var(--terracotta);
+  --color-primary-foreground: #fff;
+}
+
+:root {
+  --paper: #f4ecdf;
+  --paper-2: #eadfcb;
+  --ink: #22180f;
+  --ink-soft: #6b5b4b;
+  --terracotta: #c0502d;
+  --forest: #1e3a2c;
+  --ochre: #d9a13b;
+  --line: rgb(34 24 15 / 0.12);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+    overflow-x: clip;
+    background-image:
+      radial-gradient(circle at 15% 10%, rgb(217 161 59 / 0.10), transparent 40%),
+      radial-gradient(circle at 85% 30%, rgb(192 80 45 / 0.07), transparent 45%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.13 0 0 0 0 0.09 0 0 0 0 0.06 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-attachment: fixed;
+  }
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply text-[11px] font-medium uppercase tracking-[0.16em] text-ink-soft;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-ink/15 bg-paper/60 px-3.5 py-1.5 text-sm text-ink transition-colors hover:border-ink/40 cursor-pointer select-none whitespace-nowrap;
+  }
+  .chip[data-active="true"] {
+    @apply border-forest bg-forest text-paper;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-terracotta px-6 py-3 text-sm font-medium text-white transition hover:brightness-110 active:scale-[0.98] disabled:opacity-60 disabled:pointer-events-none;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-ink/20 px-5 py-2.5 text-sm font-medium text-ink transition hover:border-ink/50;
+  }
+  .stamp {
+    @apply flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-terracotta/60 text-terracotta leading-none;
+  }
+}
+
+.leaflet-container {
+  font-family: var(--font-sans);
+  background: #e8dfcf;
+}
+.leaflet-tile-pane {
+  filter: sepia(0.25) saturate(0.85) hue-rotate(-8deg);
+}
+.eg-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  background: var(--terracotta);
+  color: #fff;
+  font: 600 13px/1 var(--font-sans);
+  border: 3px solid #fff;
+  box-shadow: 0 4px 10px rgb(0 0 0 / 0.25);
+}
+.eg-marker.dark {
+  background: var(--forest);
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
